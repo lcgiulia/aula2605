@@ -9,10 +9,17 @@ botao.addEventListener('click', function () {
     listaUsuario = JSON.parse(localStorage.getItem("usuarios")) || [];
     const usuario = {
         usuario: document.getElementById('login').value,
-        senha: document.getElementById('senha').value
+        senha: document.getElementById('senha').value,
     };
-    //console.log(usuario);
+    const indexEditar = document.getElementById("indexEditado").value;
+    if(indexEditar !== ""){
+        listaUsuario[indexEditar]= usuario;
+        document.getElementById("indexEditado").value = "";
+    }else{
     listaUsuario.push(usuario);
+    }
+
+    //console.log(usuario);
     listaJson = JSON.stringify(listaUsuario);
     localStorage.setItem("usuarios", listaJson);
     document.getElementById('login').value = ' ';
@@ -44,14 +51,15 @@ function editarUsuario(index) {
     const usuarios = JSON.parse(localStorage.getItem
         ("usuarios")) || [];
 
-      const objUsuario =  usuariosCadastrados[index]; 
+      const objUsuario = usuarios [index]; 
       document.getElementById("login").value = objUsuario.usuario;
       document.getElementById("senha").value= objUsuario.senha;
+      document.getElementById('indexEditado').value= index;
+
 }
 
 function excluirUsuario(index) {
-    const usuarios = JSON.parse(localStorage.getItem
-        ("usuarios")) || [];
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
  
     
